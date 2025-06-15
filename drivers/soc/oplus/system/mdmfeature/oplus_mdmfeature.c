@@ -31,6 +31,8 @@
 #endif
 #include <linux/proc_fs.h>
 
+char saved_boot_cmdline[1024];
+
 /*****xueqian.zheng ******/
 #define OPLUS_RESERVE1_BLOCK_SZ             (4096)
 #define SMEM_OPLUS_FEATURE_MAP_SZ           (OPLUS_RESERVE1_BLOCK_SZ * 3)
@@ -261,3 +263,8 @@ module_exit(mdmfeature_exit);
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Oplus");
 //#endif /*OPLUS_FEATURE_MDMFEATURE*/
+static int __init save_boot_cmdline(void) {
+    strlcpy(saved_boot_cmdline, boot_command_line, sizeof(saved_boot_cmdline));
+    return 0;
+}
+core_initcall(save_boot_cmdline);

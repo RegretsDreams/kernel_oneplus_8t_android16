@@ -20,6 +20,8 @@
 #include <sec_boot_lib.h>
 #endif
 
+char saved_boot_cmdline[1024];
+
 #define SMEM_PROJECT    135
 
 #define UINT2Ptr(n)        (uint32_t *)(n)
@@ -441,7 +443,7 @@ static void update_manifest(struct proc_dir_entry *parent)
         "/vendor/odm/etc/vintf/manifest_dsds.xml",
     };
     mm_segment_t fs;
-    char * substr = strstr(boot_command_line, "simcardnum.doublesim=");
+    char * substr = strstr(saved_boot_cmdline, "simcardnum.doublesim=");
 
     if(!substr)
         return;
@@ -470,7 +472,7 @@ static void update_telephony_manifest(struct proc_dir_entry *parent)
         "/vendor/odm/etc/vintf/telephony_manifest_dsds.xml",
     };
     mm_segment_t fs;
-    char * substr = strstr(boot_command_line, "simcardnum.doublesim=");
+    char * substr = strstr(saved_boot_cmdline, "simcardnum.doublesim=");
 
     if(!substr)
         return;
