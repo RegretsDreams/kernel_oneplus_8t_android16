@@ -20,7 +20,7 @@
 #include <sec_boot_lib.h>
 #endif
 
-char saved_boot_cmdline[1024];
+extern char saved_boot_cmdline[1024];
 
 #define SMEM_PROJECT    135
 
